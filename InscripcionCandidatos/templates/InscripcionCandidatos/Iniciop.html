@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Perfil</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'InscripcionCandidatos/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'InscripcionCandidatos/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-250 p-t-65 p-b-50">
+				{% if aspirante %}
+
+				<p>{{ aspirante.nombre }}</p>
+				{% else %}
+				    <span class="login100-form-title p-b-33">
+				        Account Login
+				    </span>
+				{% endif %}
+
+				{% if ListaRequisitos %}
+				    {% for requisito in ListaRequisitos %}
+					    <p>{{ requisito.requisito }} {{ requisito.estatus }} {{ requisito.observaciones }}</p> 
+					{% endfor %}
+
+				
+				{% else %}
+				    <span class="login100-form-title p-b-33">
+				       problemas
+				    </span>
+				{% endif %}
+				
+			</div>
+		</div>
+	</div>
+	
+
+	
+
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'InscripcionCandidatos/style.css' %}">
+
+{% if latest_estatusalumno_list %}
+    <ul>
+    {% for estatus in latest_estatusalumno_list %}
+        <li><a href="{% url 'InscripcionCandidatos:detail' estatus.id %}">{{ estatus.estatus }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

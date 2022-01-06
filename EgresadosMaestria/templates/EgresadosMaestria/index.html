@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+
+	<title>Perfil| Alumnno</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="{% static 'EgresadosMaestria/css/reset-fonts-grids.css' %}" media="all" /> 
+	<link rel="stylesheet" type="text/css" href="{% static 'EgresadosMaestria/css/resume.css' %}" media="all" />
+
+</head>
+<body>
+
+<div id="doc2" class="yui-t7">
+	<br> <br>
+	<center><img src="{% static 'EgresadosMaestria/Imagenes/Logos.png' %}" alt=""></center>
+	<div id="inner">
+		{% if alumno %}
+			<div id="hd">
+				<div class="yui-gc">
+					<div class="yui-u first">
+						<h1>{{ alumno.nombre }} {{ alumno.apellidopaterno}} {{ alumno.apellidomaterno}}</h1>
+						<h2>alumno, {{alumno.alumnosemestre}}</h2>
+					</div>
+	
+					<div class="yui-u">
+						<div class="contact-info">
+							<h3><a id="pdf" href="{% url 'EgresadosMaestria:Logout'%}">Cerrar Sesion</a></h3>
+
+							<h3>{{alumno.email}}</h3>
+							<br>
+							<h3>{{alumno.curp}}</h3>
+							<br>
+							<h3>{{alumno.NumeroTelefonico}}</h3>
+						</div><!--// .contact-info -->
+					</div>
+				</div><!--// .yui-gc -->
+			<br><br><br><br>
+
+			</div><!--// hd -->
+
+        {% else %}
+				    <span class="login100-form-title p-b-33">
+				        Account Login
+				    </span>
+		{% endif %}
+
+			
+
+
+        
+					  
+				{% if listasemestre %}
+				 
+				        
+						
+							
+                        <div class="yui-u">
+							{% for semestre in listasemestre %}
+							<div class="talent">
+								<h2> <a style="text-decoration:none"  href="{% url 'EgresadosMaestria:Semestre' semestre.id %}"> {{semestre.semestre}}  </a>  </h2>
+
+							</div>
+							{% endfor %}
+
+						<div class="yui-u">
+
+								
+                               
+								
+
+								
+
+								
+								
+
+								
+								
+						
+					
+					    
+				    
+				
+				{% else %}
+				    <span class="login100-form-title p-b-33">
+				       problemas
+				    </span>
+				{% endif %}
+
+
+
+			<br><br><br><br><br><br><br><br>
+
+
+			
+		
+		
+		<div id="bd">
+			<div id="yui-main">
+				<div class="yui-b">
+
+					
+					  
+				{% if ListaRequisitos %}
+				<div class="yui-gf">
+					<h2>Lista de Requisitos</h2>
+				</div> 
+				        {% for requisito in ListaRequisitos %}
+						<form action="{% url 'EgresadosMaestria:UploadFile' %}" method="post" enctype="multipart/form-data" >
+							{% csrf_token %}
+                        <div class="yui-gf">
+						<div class="yui-u first">
+							{% if requisito.estatusrequisitoalumno == statusN %}
+							{% else %}
+								<h2></h2>
+								<h3><a id="pdf" href="https://tecnm-mx.herokuapp.com/media/{{ requisito.ruta }}">Ver</a></h3>
+							{% endif %}
+					   </div>
+
+					  
+
+						<div class="yui-u">
+
+							<div class="talent">
+								<h2>Requisito</h2>
+								{% if requisito.estatusrequisitoalumno == statusA%}
+								<p>{{requisito.requisito}}</p>
+								{% else %}
+								<a style="text-decoration:none" href="{% url 'EgresadosMaestria:Subir' requisito.id %}"><p>{{requisito.requisito}}</p></a>
+								{% endif %}
+						   </div>
+								<div class="talent">
+									<h2>Estatus</h2>
+									<p>{{requisito.estatusrequisitoalumno}}</p>
+								</div>
+
+								
+
+								<div class="talent">
+									<h2>Observaciones</h2>
+									<p>{{ requisito.observaciones }}</p>
+								</div>
+
+								
+								
+						</div>
+					    </div><!--// .yui-gf -->
+					</form>
+					    {% endfor %}
+				    
+				
+				{% else %}
+				    <span class="login100-form-title p-b-33">
+				       problemas
+				    </span>
+				{% endif %}
+					
+
+					
+
+					
+
+
+					<div class="yui-gf last">
+						<br><br><br><br>
+					</div><!--// .yui-gf -->
+
+					<h3></h3>
+				</div><!--// .yui-b -->
+			</div><!--// yui-main -->
+		</div><!--// bd -->
+
+		<div id="ft">
+			
+		</div><!--// footer -->
+
+	</div><!-- // inner -->
+
+
+</div><!--// doc -->
+
+
+</body>
+</html>
+
